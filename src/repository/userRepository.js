@@ -10,7 +10,7 @@ const userRepository ={
     },
 
     findbyusername:async function(username){
-       const user =  await User.findOne({username});
+       const user =  await User.findOne({username});  
        return user;
     },
     
