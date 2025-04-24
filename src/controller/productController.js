@@ -5,7 +5,9 @@ import { internalErrorResponse, successResponse } from "../utils/Common/CommonRe
 export const createproductcontroller = async(req,res)=>{
    try {
     
-    const product = await createproduct(req.body);
+    const categoryId = req.params.categoryId;
+    const productdata={...req.body,categoryId:categoryId}
+    const product = await createproduct(productdata);
     return res.status(StatusCodes.CREATED).json(successResponse(product));
     
    } catch (error) {

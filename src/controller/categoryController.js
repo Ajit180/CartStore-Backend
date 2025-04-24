@@ -7,6 +7,7 @@ export const createCategoryController = async(req,res)=>{
 
     try {
         const create = await createCategory(req.body);
+
         return res.status(StatusCodes.CREATED).json(successResponse(create));
         
     } catch (error) {

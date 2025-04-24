@@ -28,7 +28,7 @@ export const isAuthenticated = async (req, res, next) => {
     }
 
     const user = await userRepository.getById(response.id);
-    req.user = user.id;
+    req.user = user._id; // here i did not passed the _ so facing an error 
     next();
   } catch (error) {
     console.log('Auth middleware error', error);
