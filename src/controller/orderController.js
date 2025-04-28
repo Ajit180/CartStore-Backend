@@ -4,9 +4,7 @@ import {
   internalErrorResponse,
   successResponse,
 } from "../utils/Common/CommonResponse.js";
-import Order from "../schema/orders.js";
 import { getproductbyId } from "../service/productRepository.js";
-import userRepository from "../repository/userRepository.js";
 
 // Create Order
 export const createOrderController = async (req, res) => {

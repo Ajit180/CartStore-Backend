@@ -1,5 +1,4 @@
 import { OrderRepository } from "../repository/orderRepository.js";
-import Product from "../schema/products.js";
 import Order from "../schema/orders.js";
 
 export const createOrderService = async (data,id) => {
