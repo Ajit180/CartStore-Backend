@@ -1,7 +1,6 @@
 import { StatusCodes } from "http-status-codes";
-import {  createCategory, deletecategory } from "../service/categoryService.js";
+import {  createCategory, deletecategory, updatecategory } from "../service/categoryService.js";
 import { internalErrorResponse, successResponse } from "../utils/Common/CommonResponse.js";
-import { CategoryRepository } from "../repository/categoryRepository.js";
 
 
 export const createCategoryController = async(req,res)=>{
@@ -37,3 +36,27 @@ export const deleteCategoryController = async (req, res) => {
       return res.status(500).json({ message: "Internal Server Error" });
     }
   };
+
+  export const updateCategoryController = async (req, res) => {
+    try {
+      const {id} = req.params;
+      const updateData = req.body;
+      console.log(updateData);
+  
+      const updatedCategory = await updatecategory(id,updateData);
+  
+      if (!updatedCategory) {
+        return res.status(404).json({ message: "Category not found" });
+      }
+  
+      return res.status(200).json({
+        message: "Category updated successfully",
+        category: updatedCategory
+      });
+    } catch (error) {
+      console.error("Error in updateCategoryController:", error.message);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  };
+
+  
