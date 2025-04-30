@@ -26,7 +26,7 @@ export const getallProduct = async()=>{
 export const getproductbyId = async(id)=>{
 
     try {
-        const product = await ProductRepository.getById(id);
+        const product = await ProductRepository.getbyid(id);
         return product;
         
     } catch (error) {
