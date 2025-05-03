@@ -27,6 +27,10 @@ const userRepository ={
         throw new Error("User not found");
       }
     },
+
+    createAdmin:async()=>{
+      
+    }
 }
 
 

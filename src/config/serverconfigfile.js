@@ -22,4 +22,8 @@ export const AWS_SECRET_ACCESS_KEY=process.env.AWS_SECRET_ACCESS_KEY
 
 export const AWS_BUCKET_NAME=process.env.AWS_BUCKET_NAME
 
+export const ADMIN_MAIL=process.env.ADMIN_MAIL
+export const ADMIN_USERNAME=process.env.ADMIN_USERNAME
+export const ADMIN_PASSWORD=process.env.ADMIN_PASSWORD
+
 //change made in file rename earlier file name was Serverconfig now it serverconfig
