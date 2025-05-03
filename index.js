@@ -8,10 +8,24 @@ dotenv.config();
 
 const app = express();
 
+const allowedOrigins = [
+    'http://localhost:5173',
+    'https://admin-dashboard-mtdy.vercel.app'
+  ];
 
 // 🛡️ Middleware to parse JSON bodies
 app.use(express.json());
-app.use(cors());
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 
 // 🛡️ Middleware to parse URL-encoded data (from forms etc.)
 app.use(express.urlencoded({ extended: true }));
