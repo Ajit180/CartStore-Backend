@@ -30,6 +30,11 @@ const userSchema = new mongoose.Schema(
     avatar: {
       type: String // Will be auto-generated using robohash
     },
+    role: {
+      type: String,
+      enum: ['admin', 'customer'],
+      default: 'customer'
+    },
     isVerified: {
       type: Boolean,
       default: false
