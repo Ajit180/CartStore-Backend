@@ -4,7 +4,7 @@ import { internalErrorResponse, successResponse } from "../utils/Common/CommonRe
 import { PutObjectCommand } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { s3Client } from "../config/awsconfig.js";
-import { AWS_BUCKET_NAME } from "../config/serverconfig.js";
+import { AWS_BUCKET_NAME } from "../config/serverconfigfile.js";
 
 export const createproductcontroller = async(req,res)=>{
    try {
