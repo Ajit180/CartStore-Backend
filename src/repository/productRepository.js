@@ -8,6 +8,10 @@ export const ProductRepository = {
     
     getbyid: async(id)=>{
         return await Product.findById(id).populate('categoryId','name');
+    },
+
+    getall:async()=>{
+        return await Product.find().populate('categoryId','name');
     }
     
 }

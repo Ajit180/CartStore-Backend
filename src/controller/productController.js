@@ -1,6 +1,10 @@
 import { StatusCodes } from "http-status-codes";
-import { createproduct, deleteproduct, getproductbyId, updateproduct } from "../service/productRepository.js";
+import { createproduct, deleteproduct, getallProduct, getproductbyId, updateproduct } from "../service/productRepository.js";
 import { internalErrorResponse, successResponse } from "../utils/Common/CommonResponse.js";
+import { PutObjectCommand } from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
+import { s3Client } from "../config/awsconfig.js";
+import { AWS_BUCKET_NAME } from "../config/serverConfig.js";
 
 export const createproductcontroller = async(req,res)=>{
    try {
@@ -67,5 +71,48 @@ export const deleteProductController = async (req, res) => {
   } catch (error) {
     console.log('Error in deleteProductController:', error.message);
     res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
+
+
+export const getPoductAllContoller = async(req,res)=>{
+
+  try {
+     const product = await getallProduct();
+     if (!product) {
+        return res.status(404).json({ success: false, message: "Product not found" });
+      }
+     return res.status(StatusCodes.ACCEPTED).json(successResponse(product))
+
+     
+  } catch (error) {
+     console.log('Create product error:', error);
+   res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(internalErrorResponse(error));
+  }
+}
+
+
+export const getPresignedUrl = async (req, res) => {
+  try {
+    const fileKey = `${Date.now()}.png`; // You can also get file type dynamically
+    const command = new PutObjectCommand({
+      Bucket: AWS_BUCKET_NAME,
+      Key: fileKey,
+      ContentType: 'image/png'
+    });
+
+    const url = await getSignedUrl(s3Client, command, { expiresIn: 60 }); // 60 seconds
+
+    return res
+      .status(200)
+      .json(successResponse(url, 'Presigned URL generated successfully'));
+  } catch (error) {
+    console.log('Error in getPresignedUrlFromAWS', error);
+    if (error.name === 'CredentialsProviderError') {
+      return res.status(403).json(customErrorResponse(error));
+    }
+    return res
+      .status(500)
+      .json(internalErrorResponse(error));
   }
 };

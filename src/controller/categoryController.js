@@ -1,5 +1,5 @@
 import { StatusCodes } from "http-status-codes";
-import {  createCategory, deletecategory, updatecategory } from "../service/categoryService.js";
+import {  createCategory, deletecategory, getallCategory, getCategorybyId, updatecategory } from "../service/categoryService.js";
 import { internalErrorResponse, successResponse } from "../utils/Common/CommonResponse.js";
 
 
@@ -37,6 +37,7 @@ export const deleteCategoryController = async (req, res) => {
     }
   };
 
+
   export const updateCategoryController = async (req, res) => {
     try {
       const {id} = req.params;
@@ -59,4 +60,40 @@ export const deleteCategoryController = async (req, res) => {
     }
   };
 
+  export const getCategoryByIdController = async (req, res) => {
+    try {
+      const {id} = req.params;
+      const category = await getCategorybyId(id);
+  
+      if (!category) {
+        return res.status(404).json({ message: "Category not found" });
+      }
+  
+      return res.status(200).json({
+        message: "Category fetched successfully",
+        category,
+      });
+    } catch (error) {
+      console.error("Error in getCategoryByIdController:", error.message);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  };
+
+  export const getCategoryAllController = async (req, res) => {
+    try {
+      const category = await getallCategory();
+  
+      if (!category) {
+        return res.status(404).json({ message: "Category not found" });
+      }
+  
+      return res.status(200).json({
+        message: "Category fetched successfully",
+        category,
+      });
+    } catch (error) {
+      console.error("Error in getCategoryByIdController:", error.message);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  };
   

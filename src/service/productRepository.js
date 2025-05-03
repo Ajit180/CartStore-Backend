@@ -15,7 +15,7 @@ export const createproduct = async(data)=>{
 export const getallProduct = async()=>{
    try {
 
-    const product = await ProductRepository.getAll();
+    const product = await ProductRepository.getall();
     return product;
     
    } catch (error) {

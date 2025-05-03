@@ -33,7 +33,7 @@ const productSchema = new mongoose.Schema({
         required:[true,'Product brand name is required']
     },
     rating:{
-        type:Number,
+        type:String,
         required:[true,'Product rating is requried']
     }
 },{timestamps:true})

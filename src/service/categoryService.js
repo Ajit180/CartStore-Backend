@@ -26,8 +26,8 @@ export const getallCategory = async()=>{
 export const getCategorybyId = async(id)=>{
 
     try {
-        const product = await CategoryRepository.getById(id);
-        return product;
+        const category = await CategoryRepository.getById(id);
+        return category;
         
     } catch (error) {
         console.log('Error in getting Category by Id',error.message);
