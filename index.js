@@ -12,6 +12,7 @@ const allowedOrigins = [
     'http://localhost:5173',
     'https://admin-dashboard-mtdy.vercel.app',
     'http://localhost:3000',
+    'https://cart-frontend-2.vercel.app',
   ];
 
 // 🛡️ Middleware to parse JSON bodies
