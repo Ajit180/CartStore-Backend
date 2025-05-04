@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post('/createproduct/:categoryId',isAuthenticated,authorizeRoles('admin'),createproductcontroller);
 router.get('/getproduct/:productId',isAuthenticated,authorizeRoles('admin'),getPoductByIdContoller);
-router.put('/updateproduct/:id',isAuthenticated,authorizeRoles('admin,customer'),updateProductController);
+router.put('/updateproduct/:id',isAuthenticated,authorizeRoles('admin'),updateProductController);
 router.delete('/deleteproduct/:id',isAuthenticated,authorizeRoles('admin'),deleteProductController);
 router.get('/getall',getLimiter,getPoductAllContoller);
 router.get('/getpre',getLimiter,getPresignedUrl);
