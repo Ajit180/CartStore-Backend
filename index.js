@@ -10,7 +10,8 @@ const app = express();
 
 const allowedOrigins = [
     'http://localhost:5173',
-    'https://admin-dashboard-mtdy.vercel.app'
+    'https://admin-dashboard-mtdy.vercel.app',
+    'http://localhost:3000',
   ];
 
 // 🛡️ Middleware to parse JSON bodies
